@@ -44,15 +44,7 @@ namespace TestApi.Controllers
                 Address = model.Address,
             };
 
-            IdentityResult result;
-            if (model.Password == null)
-            {
-                return BadRequest(new { message = "Password is required." });
-            }
-            else
-            {
-                result = await _userManager.CreateAsync(user, model.Password);
-            }
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -109,20 +101,10 @@ namespace TestApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (string.IsNullOrEmpty(model.Email))
-            {
-                return BadRequest(new { message = "Email is required." });
-            }
-
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user != null)
             {
-                if (string.IsNullOrEmpty(model.Password))
-                {
-                    return BadRequest(new { message = "Password is required." });
-                }
-
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
@@ -148,19 +130,14 @@ namespace TestApi.Controllers
         private string GenerateJwtToken(ApplicationUser user)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
-            var secretKey = jwtSettings["SecretKey"];
-            if (string.IsNullOrEmpty(secretKey))
-            {
-                throw new ArgumentNullException(nameof(secretKey), "SecretKey is not configured in JwtSettings.");
-            }
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, user.Role ?? string.Empty)
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var token = new JwtSecurityToken(

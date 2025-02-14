@@ -290,3 +290,4 @@
 /Users/d.carpentiero/Downloads/C#/TestApi/obj/Release/net8.0/TestApi.pdb
 /Users/d.carpentiero/Downloads/C#/TestApi/obj/Release/net8.0/TestApi.genruntimeconfig.cache
 /Users/d.carpentiero/Downloads/C#/TestApi/obj/Release/net8.0/ref/TestApi.dll
+/Users/d.carpentiero/Downloads/C#/TestApi/obj/Release/net8.0/TestApi.sourcelink.json

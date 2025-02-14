@@ -45,20 +45,12 @@ namespace TestApi.Controllers
 
             if (isAuthenticated)
             {
-                string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
-                var order = new Order
-                {
-                    OrderItems = new List<OrderItem>()
-                };
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var order = new Order();
 
                 if (userId is not null)
                 {
-                    var user = await _userManager.FindByIdAsync(userId);
-                    if (user == null)
-                    {
-                        return NotFound($"User with ID {userId} not found.");
-                    }
-                    order.ApplicationUser = user;
+                    order.ApplicationUser = await _userManager.FindByIdAsync(userId);
                 }
 
                 foreach (OrderItemDTO orderItemDTO in orderItemDTOs)

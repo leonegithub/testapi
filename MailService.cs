@@ -25,10 +25,6 @@ public class MailService : IMailService
             emailMessage.Body = emailBodyBuilder.ToMessageBody();
             //this is the SmtpClient class from the Mailkit.Net.Smtp namespace, not the System.Net.Mail one
             SmtpClient MailClient = new SmtpClient();
-            if (_mailSettings == null)
-            {
-                throw new InvalidOperationException("Mail settings are not configured.");
-            }
             MailClient.Connect(_mailSettings.Host, _mailSettings.Port, MailKit.Security.SecureSocketOptions.StartTls);
             MailClient.Authenticate(_mailSettings.Username, _mailSettings.Password);
             MailClient.Send(emailMessage);
