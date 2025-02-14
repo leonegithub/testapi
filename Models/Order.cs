@@ -1,11 +1,14 @@
-namespace TestApi.Models
-{
-    public class Order
-    {
-        public int OrderId { get; set; }
+using TestApi.Models;
 
-        public DateTime OrderDate { get; set; }
-        public ICollection<OrderItem>? OrderItems { get; } = new List<OrderItem>();
-        public ApplicationUser? ApplicationUser { get; set; }
+public class Order
+{
+    public int OrderId { get; set; }
+    public DateTime OrderDate { get; set; }
+    public ApplicationUser ApplicationUser { get; set; } = new ApplicationUser();
+    public ICollection<OrderItem> OrderItems { get; set; }
+
+    public Order()
+    {
+        OrderItems = new List<OrderItem>();
     }
 }
