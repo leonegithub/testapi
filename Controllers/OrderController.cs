@@ -22,6 +22,7 @@ namespace TestApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetOrder()
         {
             // Eager load OrderItems and ApplicationUser for complete data
