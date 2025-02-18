@@ -7,7 +7,7 @@
 namespace TestApi.Migrations
 {
     /// <inheritdoc />
-    public partial class FourthCreate : Migration
+    public partial class SecondCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,20 +15,20 @@ namespace TestApi.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "1b3a5e5f-940b-4b3c-aa8e-ff97b9a8b4da");
+                keyValue: "82eaff07-24a2-40dd-9897-dfec3f1103d7");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "a0d45c98-0a7b-41b4-8cff-0e3f3ac74e0f");
+                keyValue: "f62bf39f-aed7-49a9-bc03-e67ef5008de6");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3d39a5ca-e057-48a7-92e0-56a8a696976d", null, "User", "USER" },
-                    { "62e6d813-ac70-45af-83e3-f8f970ea33f6", null, "SuperUser", "SUPERUSER" }
+                    { "062e7fc4-8e2c-400b-9843-b50218b594be", null, "User", "USER" },
+                    { "691c70c0-4cc7-43ec-90b8-6341a95bed92", null, "SuperUser", "SUPERUSER" }
                 });
         }
 
@@ -38,20 +38,20 @@ namespace TestApi.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "3d39a5ca-e057-48a7-92e0-56a8a696976d");
+                keyValue: "062e7fc4-8e2c-400b-9843-b50218b594be");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "62e6d813-ac70-45af-83e3-f8f970ea33f6");
+                keyValue: "691c70c0-4cc7-43ec-90b8-6341a95bed92");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1b3a5e5f-940b-4b3c-aa8e-ff97b9a8b4da", null, "SuperUser", "SUPERUSER" },
-                    { "a0d45c98-0a7b-41b4-8cff-0e3f3ac74e0f", null, "User", "USER" }
+                    { "82eaff07-24a2-40dd-9897-dfec3f1103d7", null, "User", "USER" },
+                    { "f62bf39f-aed7-49a9-bc03-e67ef5008de6", null, "SuperUser", "SUPERUSER" }
                 });
         }
     }

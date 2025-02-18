@@ -50,13 +50,13 @@ namespace TestApi.Migrations
                         },
                         new
                         {
-                            Id = "d4407c6d-ea28-4150-87ea-d1798ef2d804",
+                            Id = "691c70c0-4cc7-43ec-90b8-6341a95bed92",
                             Name = "SuperUser",
                             NormalizedName = "SUPERUSER"
                         },
                         new
                         {
-                            Id = "2d7c18bb-9a86-4888-810e-06540a0e7b87",
+                            Id = "062e7fc4-8e2c-400b-9843-b50218b594be",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -238,8 +238,7 @@ namespace TestApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Role");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
@@ -551,7 +550,7 @@ namespace TestApi.Migrations
 
             modelBuilder.Entity("TestApi.Models.OrderItem", b =>
                 {
-                    b.HasOne("Order", "Order")
+                    b.HasOne("Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -562,8 +561,6 @@ namespace TestApi.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });

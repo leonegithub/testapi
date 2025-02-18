@@ -182,8 +182,8 @@ namespace TestApi.Migrations
                 {
                     OrderId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true),
-                    OrderDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    OrderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -249,9 +249,9 @@ namespace TestApi.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "46e56f9c-b822-426e-a2a8-cf3e9d47944f", null, "SuperUser", "SUPERUSER" },
-                    { "99af711e-af0d-44dd-a98a-5885f1a3d243", null, "User", "USER" },
-                    { "cd6a7ac2-0bab-4c0a-9619-6efe2408d97e", null, "Admin", "ADMIN" }
+                    { "82eaff07-24a2-40dd-9897-dfec3f1103d7", null, "User", "USER" },
+                    { "cd6a7ac2-0bab-4c0a-9619-6efe2408d97e", null, "Admin", "ADMIN" },
+                    { "f62bf39f-aed7-49a9-bc03-e67ef5008de6", null, "SuperUser", "SUPERUSER" }
                 });
 
             migrationBuilder.InsertData(

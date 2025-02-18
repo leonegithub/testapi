@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TestApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212153754_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250217134736_SecondCreate")]
+    partial class SecondCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,13 +53,13 @@ namespace TestApi.Migrations
                         },
                         new
                         {
-                            Id = "46e56f9c-b822-426e-a2a8-cf3e9d47944f",
+                            Id = "691c70c0-4cc7-43ec-90b8-6341a95bed92",
                             Name = "SuperUser",
                             NormalizedName = "SUPERUSER"
                         },
                         new
                         {
-                            Id = "99af711e-af0d-44dd-a98a-5885f1a3d243",
+                            Id = "062e7fc4-8e2c-400b-9843-b50218b594be",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -167,6 +167,25 @@ namespace TestApi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("TestApi.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -222,8 +241,7 @@ namespace TestApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Role");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
@@ -332,25 +350,6 @@ namespace TestApi.Migrations
                             CategoryId = 10,
                             CategoryName = "Pet Supplies"
                         });
-                });
-
-            modelBuilder.Entity("TestApi.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("OrderId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("TestApi.Models.OrderItem", b =>
@@ -543,7 +542,7 @@ namespace TestApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TestApi.Models.Order", b =>
+            modelBuilder.Entity("Order", b =>
                 {
                     b.HasOne("TestApi.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
@@ -554,7 +553,7 @@ namespace TestApi.Migrations
 
             modelBuilder.Entity("TestApi.Models.OrderItem", b =>
                 {
-                    b.HasOne("TestApi.Models.Order", "Order")
+                    b.HasOne("Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -565,8 +564,6 @@ namespace TestApi.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });
@@ -582,14 +579,14 @@ namespace TestApi.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("TestApi.Models.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TestApi.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,14 +4,14 @@ namespace TestApi.Models.Dto
     {
 
         public int OrderItemDTOId { get; set; }
-        public int ProductId { get; set; }
+        public ProductDTO? Product { get; set; }
         public int Quantity { get; set; }
 
-        public static OrderItemDTO MapToDTO(OrderItem orderItem)
+        public static OrderItemDTO MapToDTOOrder(OrderItem orderItem)
         {
             return new OrderItemDTO
             {
-                ProductId = orderItem.ProductId,
+                Product = ProductDTO.MapToDTOProduct(orderItem.Product),
                 Quantity = orderItem.Quantity,
             };
         }

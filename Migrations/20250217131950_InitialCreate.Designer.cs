@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TestApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250214080845_FourthCreate")]
-    partial class FourthCreate
+    [Migration("20250217131950_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,13 +53,13 @@ namespace TestApi.Migrations
                         },
                         new
                         {
-                            Id = "62e6d813-ac70-45af-83e3-f8f970ea33f6",
+                            Id = "f62bf39f-aed7-49a9-bc03-e67ef5008de6",
                             Name = "SuperUser",
                             NormalizedName = "SUPERUSER"
                         },
                         new
                         {
-                            Id = "3d39a5ca-e057-48a7-92e0-56a8a696976d",
+                            Id = "82eaff07-24a2-40dd-9897-dfec3f1103d7",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -241,8 +241,7 @@ namespace TestApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Role");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
@@ -554,7 +553,7 @@ namespace TestApi.Migrations
 
             modelBuilder.Entity("TestApi.Models.OrderItem", b =>
                 {
-                    b.HasOne("Order", "Order")
+                    b.HasOne("Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -565,8 +564,6 @@ namespace TestApi.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Product");
                 });

@@ -61,25 +61,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             }
         );
 
-        /* modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-           new IdentityUserRole<string>
-           {
-               UserId = "ccbee901-52ce-465c-a34e-5474a89b0fb9",
-               RoleId = "cd6a7ac2-0bab-4c0a-9619-6efe2408d97e"
-           }
-       ); */
-
-        modelBuilder.Entity<ApplicationUser>()
-            .Property(u => u.Role)
-            .HasColumnName("Role");
-
-        modelBuilder.Entity<Order>()
-         .HasMany(o => o.OrderItems)
-         .WithOne(e => e.Order)
-         .HasForeignKey(e => e.OrderId)
-         .IsRequired();
-
-
 
     }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

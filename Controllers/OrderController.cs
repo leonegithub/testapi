@@ -25,16 +25,31 @@ namespace TestApi.Controllers
         [Authorize]
         public async Task<IActionResult> GetOrder()
         {
-            // Eager load OrderItems and ApplicationUser for complete data
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             var orders = await _context.Orders
+            .Where(o => o.ApplicationUser.Id == userId)
                 .Include(o => o.OrderItems)
-                .Include(o => o.ApplicationUser)
+                    .ThenInclude(oi => oi.Product) // Ensure Product is loaded
                 .ToListAsync();
 
             if (orders != null)
             {
-                return Ok(orders);
+                var result = orders.Select(o => new
+                {
+                    o.OrderId,
+                    o.OrderDate,
+                    OrderItems = o.OrderItems.Select(oi => new
+                    {
+                        oi.Product?.Name,
+                        oi.Quantity
+                    }),
+
+                });
+
+                return Ok(result);
             }
+
             return BadRequest(ModelState);
         }
 
@@ -42,9 +57,7 @@ namespace TestApi.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrder([FromBody] ICollection<OrderItemDTO> orderItemDTOs)
         {
-            bool isAuthenticated = User.Identity != null && User.Identity.IsAuthenticated;
-
-            if (isAuthenticated)
+            if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var order = new Order();
@@ -56,26 +69,25 @@ namespace TestApi.Controllers
 
                 foreach (OrderItemDTO orderItemDTO in orderItemDTOs)
                 {
-                    var product = await _context.Products.FindAsync(orderItemDTO.ProductId);
+                    var product = await _context.Products.FindAsync(orderItemDTO.Product.Id);
                     if (product == null)
                     {
-                        return BadRequest($"Product with ID {orderItemDTO.ProductId} not found.");
+                        return BadRequest($"Product {orderItemDTO.Product} not found.");
                     }
 
                     var orderItem = new OrderItem
                     {
-                        Order = order,
-                        ProductId = orderItemDTO.ProductId,
+                        OrderId = order.OrderId,
+                        ProductId = product.ProductId,
                         Product = product,
                         Quantity = orderItemDTO.Quantity
                     };
 
-                    order.OrderItems.Add(orderItem); // associate the orderItem to the order
+                    order.OrderItems.Add(orderItem);
                 }
 
                 order.OrderDate = DateTime.Now;
                 _context.Add(order);
-
                 await _context.SaveChangesAsync();
 
                 return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order);
@@ -85,5 +97,3 @@ namespace TestApi.Controllers
         }
     }
 }
-
-
