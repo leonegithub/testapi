@@ -11,6 +11,7 @@ namespace TestApi.Models.Dto
         {
             return new OrderItemDTO
             {
+                OrderItemDTOId = orderItem.Quantity,
                 Product = ProductDTO.MapToDTOProduct(orderItem.Product),
                 Quantity = orderItem.Quantity,
             };

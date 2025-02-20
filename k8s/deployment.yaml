@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leonespa-deployment
+spec:
+  replicas: 3 # Numero di pod da eseguire
+  selector:
+    matchLabels:
+      app: leonespa
+  template:
+    metadata:
+      labels:
+        app: leonespa
+    spec:
+      containers:
+        - name: leonespa
+          image: leonespa/leonespa:latest # L'immagine Docker dal Docker Hub
+          ports:
+            - containerPort: 80 # La porta su cui il container espone il servizio

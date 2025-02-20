@@ -39,7 +39,6 @@
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Microsoft.SqlServer.Server.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Mono.TextTemplating.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/SQLitePCLRaw.batteries_v2.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/SQLitePCLRaw.core.dll
@@ -54,13 +53,10 @@
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Composition.Runtime.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Composition.TypedParts.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Drawing.Common.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Memory.Data.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Runtime.Caching.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Security.Permissions.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Windows.Extensions.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.resources.dll
@@ -278,10 +274,6 @@
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Scripting.resources.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Scripting.resources.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Scripting.resources.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Security.Cryptography.ProtectedData.dll
-/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/MailKit.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -291,3 +283,6 @@
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/System.Security.Cryptography.Pkcs.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
 /Users/d.carpentiero/Downloads/C#/TestApi/obj/Debug/net8.0/TestApi.sourcelink.json
+/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/RestSharp.dll
+/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Stripe.dll
+/Users/d.carpentiero/Downloads/C#/TestApi/bin/Debug/net8.0/Stripe.net.dll

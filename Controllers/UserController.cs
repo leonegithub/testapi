@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TestApi.Models;
@@ -26,8 +27,12 @@ namespace TestApi.Controllers
             _mailService = mailService;
         }
 
+        public string EmailConfirmationUrl { get; set; }
+
+        public bool DisplayConfirmAccountLink { get; set; }
+
         [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromForm] RegisterUser model)
+        public async Task<IActionResult> RegisterUser([FromForm] RegisterUser model, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -46,6 +51,7 @@ namespace TestApi.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+
             if (result.Succeeded)
             {
                 string role = "User";
@@ -58,19 +64,32 @@ namespace TestApi.Controllers
                 {
                     return BadRequest(roleResult.Errors);
                 }
+                DisplayConfirmAccountLink = true;
+                if (DisplayConfirmAccountLink)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    EmailConfirmationUrl = Url.Page(
+                     "/Account/ConfirmEmail",
+                     pageHandler: null,
+                     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                     protocol: Request.Scheme
+                     );
+                }
 
-                /*  MailData mailData = new MailData
-                 {
-                     EmaiToId = user.Email,
-                     EmailToName = user.UserName,
-                     EmailSubject = "Thank You for Registering!",
-                     EmailBody = $"Thank you for registering with us, {user.UserName}",
-                 };
+                MailData mailData = new MailData
+                {
+                    EmaiToId = user.Email,
+                    EmailToName = user.UserName,
+                    EmailSubject = "Grazie per esserti registrato!",
+                    EmailBody = $"Grazie per esserti registrato {user.UserName}, per favore clicca sul link per confermare la mail: {EmailConfirmationUrl}",
+                };
 
-                 _mailService.SendMail(mailData); */
+                _mailService.SendMail(mailData);
 
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return Ok(new { message = "utente creato con successo!", user });
+                /* await _signInManager.SignInAsync(user, isPersistent: false);
+                return Ok(new { message = "utente creato con successo!", user }); */
+                return Ok(new { message = "Clicca sul link inviato per email per completare la registrazione." });
             }
 
             return BadRequest(result.Errors);

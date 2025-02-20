@@ -90,7 +90,14 @@ namespace TestApi.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order);
+                var response = new OrderDTO
+                {
+                    OrderId = order.OrderId,
+                    OrderDate = order.OrderDate,
+                    OrderItems = order.OrderItems.Select(OrderItemDTO.MapToDTOOrder)
+                };
+
+                return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, response);
             }
 
             return Unauthorized();
